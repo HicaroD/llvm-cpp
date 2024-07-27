@@ -27,19 +27,14 @@ int main() {
 
   llvm::Value *format_str = builder.CreateGlobalStringPtr("Hello, World!\n");
 
-  // Call printf
   builder.CreateCall(printf, {format_str});
 
-  // Return 0
   builder.CreateRet(builder.getInt32(0));
 
-  // Verify the module
   verifyModule(*module, &llvm::errs());
 
-  // Print the LLVM IR
   module->print(llvm::outs(), nullptr);
 
-  // Clean up
   delete module;
 
   return 0;
